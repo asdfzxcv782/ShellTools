@@ -6,15 +6,24 @@ Memory={
 	"MemoryFree":sys.argv[3]
 }
 
+MemoryFreeAlarm=90
 
 def Caculate(**info):
-	for index,x in enumerate(info):
-		#print(index)
-		#print(x)
-		info[x]=int(sys.argv[index + 1])
-	return round((info["MemoryFree"]/info["MemoryTotal"])*100,2)
+	#MemoryFreeAlarm=90
+	for index,x in enumerate(info,start=1):
+		info[x]=int(sys.argv[index])
+	Status={
+		"Alarm":False,
+		"MemoryFree":"",
+		"MemoryUsed":""
+	}
+	Status["MemoryFree"]=round((info["MemoryFree"]/info["MemoryTotal"])*100,2)
+	Status["MemoryUsed"]=round((info["MemoryUsed"]/info["MemoryTotal"])*100,2)
+	if Status["MemoryFree"] < MemoryFreeAlarm :
+		Status["Alarm"]=True
+	return Status
 	
 
-result=Caculate(**Memory)
+Result=Caculate(**Memory)
 
-print("Memory Free: "+ str(result) +" %")
+print(Result)

@@ -5,8 +5,10 @@ function getMemoryStatus(){
 	MemoryUsed="$(free -m | grep Mem | awk '{print $3}')";
 	MemoryFree="$(free -m | grep Mem | awk '{print $4}')"
 
-	python -u ../py/calculateMemory.py $MemoryTotal \
-        $MemoryUsed $MemoryFree;
+	MemoryStatus=$(python -u ../py/calculateMemory.py $MemoryTotal \
+        $MemoryUsed $MemoryFree);
+
+	echo $MemoryStatus;
 	#get memory usage
 	#memory="$(free -m | grep Mem | awk '{print ($3/$2)*100}')";
 	#set alarm usage %
