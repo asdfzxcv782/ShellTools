@@ -11,17 +11,18 @@ def getWebHook():
 			return slackWebHook
 
 def setMessage(status):
-        with open_fs('../shell') as home_fs:
-                with home_fs.open('sampleNotification.json') as Message:
-                        slackMessage=Message.read()
-			print
-                        return slackMessage
+	#with open_fs('../shell') as home_fs:
+	with open_fs('.') as home_fs:
+		with home_fs.open('sampleNotification.json') as Message:
+			print(status)
+			slackMessage=Message.read()
+			return slackMessage	
 
-def sendMessage():
+def sendMessage(status):
 	url = getWebHook()
-	payload = setMessage(sys.argv[1])
+	payload = setMessage(status)
 	headers = {'content-type': 'application/json', 'Accept-Charset': 'UTF-8'}
 	r = requests.post(url, data=payload, headers=headers)
 	print(r.status_code)
 
-sendMessage()
+
