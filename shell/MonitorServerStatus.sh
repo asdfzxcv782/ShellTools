@@ -9,6 +9,8 @@ function getMemoryStatus(){
         $MemoryUsed $MemoryFree);
 
 	echo $MemoryStatus;
+
+	python ../py/slackNotification.py $MemoryStatus
 	#get memory usage
 	#memory="$(free -m | grep Mem | awk '{print ($3/$2)*100}')";
 	#set alarm usage %
