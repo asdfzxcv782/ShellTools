@@ -7,7 +7,7 @@ Memory={
 	"MemoryFree":sys.argv[3]
 }
 
-MemoryFreeAlarm=90
+MemoryFreeAlarm=20
 
 def Caculate(**info):
 	#MemoryFreeAlarm=90
@@ -20,10 +20,9 @@ def Caculate(**info):
 	}
 	Status["MemoryFree"]=round((info["MemoryFree"]/info["MemoryTotal"])*100,2)
 	Status["MemoryUsed"]=round((info["MemoryUsed"]/info["MemoryTotal"])*100,2)
-	slack.sendMessage(Status)
 	if Status["MemoryFree"] < MemoryFreeAlarm :
 		Status["Alarm"]=True
-		#py.slackNotification.sendMessage(Status)
+	slack.sendMessage(Status)	
 	return Status
 	
 

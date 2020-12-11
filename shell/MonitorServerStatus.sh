@@ -5,12 +5,11 @@ function getMemoryStatus(){
 	MemoryUsed="$(free -m | grep Mem | awk '{print $3}')";
 	MemoryFree="$(free -m | grep Mem | awk '{print $4}')"
 
-	MemoryStatus=$(python -u ../py/calculateMemory.py $MemoryTotal \
+	MemoryStatus=$(python3 -u ../py/calculateMemory.py $MemoryTotal \
         $MemoryUsed $MemoryFree);
 
 	echo $MemoryStatus;
-
-	python ../py/slackNotification.py $MemoryStatus
+	
 	#get memory usage
 	#memory="$(free -m | grep Mem | awk '{print ($3/$2)*100}')";
 	#set alarm usage %
