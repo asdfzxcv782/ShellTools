@@ -18,6 +18,7 @@ def Caculate(**info):
 		"MemoryFree":"",
 		"MemoryUsed":""
 	}
+	print(Status)
 	Status["MemoryFree"]=round((info["MemoryFree"]/info["MemoryTotal"])*100,2)
 	Status["MemoryUsed"]=round((info["MemoryUsed"]/info["MemoryTotal"])*100,2)
 	if Status["MemoryFree"] < MemoryFreeAlarm :

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function getMemoryStatus(){
 	MemoryTotal="$(free -m | grep Mem | awk '{print $2}')";

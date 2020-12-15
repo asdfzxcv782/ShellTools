@@ -4,6 +4,9 @@ import json
 from fs import open_fs
 import sys
 import socket
+import os
+
+print(os.getenv('shelltools_path'))
 
 def getWebHook():
 	with open_fs('../keys') as home_fs:
