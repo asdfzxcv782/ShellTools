@@ -5,7 +5,7 @@ function getMemoryStatus(){
 	MemoryUsed="$(free -m | grep Mem | awk '{print $3}')";
 	MemoryFree="$(free -m | grep Mem | awk '{print $4}')"
 
-	MemoryStatus=$(python3 -u ../py/calculateMemory.py $MemoryTotal \
+	MemoryStatus=$(python3 -u $HOME/ShellTools/py/calculateMemory.py $MemoryTotal \
         $MemoryUsed $MemoryFree);
 
 	echo $MemoryStatus;
