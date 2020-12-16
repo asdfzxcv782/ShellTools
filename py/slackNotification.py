@@ -14,6 +14,8 @@ def getWebHook():
 			slackWebHook=webhook_key.read()
 			print(slackWebHook)
 			return slackWebHook
+		webhook_key.close()
+	home_fs.close()	
 
 def setMessage(status):
 	with open_fs(home + '/ShellTools/py') as home_fs:
@@ -32,6 +34,8 @@ def setMessage(status):
 				slackMessage["icon_emoji"] = ":heavy_check_mark:"	
 			print(slackMessage)
 			return json.dumps(slackMessage,  indent=4)
+		Message.close()
+	home_fs.close()		
 
 def sendMessage(status):
 	url = getWebHook()

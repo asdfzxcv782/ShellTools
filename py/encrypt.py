@@ -2,7 +2,6 @@ import os
 import fs
 from fs import open_fs
 import gnupg
-import os
 import json
 
 home=os.environ['HOME']
@@ -25,11 +24,14 @@ def encyptFile():
 		print("ok: ", status.ok)
 		print("status: ", status.status)
 		print("stderr: ", status.stderr)
+		f.close()
 
 def getPassPhrase():
 	with open_fs(keyDir) as home_fs:
 		with home_fs.open('envConfig.json') as passphrase:
 			passphrase=json.loads(passphrase.read())
 			return passphrase["encrypt"]["passphrase"]
+		passphrase.close()
+	home_fs.close()		
 encyptFile()
 
