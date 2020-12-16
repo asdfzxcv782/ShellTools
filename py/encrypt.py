@@ -2,10 +2,14 @@ import os
 import fs
 from fs import open_fs
 import gnupg
+import os
+import json
 
-keyDir="../keys"
+home=os.environ['HOME']
 
-gpg = gnupg.GPG(gnupghome='/home/ushow/.gnupg')
+keyDir=home+"/ShellTools/keys"
+
+gpg = gnupg.GPG(gnupghome=home + '/.gnupg')
 
 home_fs = open_fs(keyDir)
 
@@ -15,16 +19,17 @@ def encyptFile():
 		with home_fs.open(path[1:], 'rb') as f:
     			status = gpg.decrypt_file(
 				file=f,
-				passphrase='vshow2351700',
+				passphrase=getPassPhrase(),
 				output=keyDir + path[:-4]
 			)
 		print("ok: ", status.ok)
 		print("status: ", status.status)
 		print("stderr: ", status.stderr)
 
+def getPassPhrase():
+	with open_fs(keyDir) as home_fs:
+		with home_fs.open('envConfig.json') as passphrase:
+			passphrase=json.loads(passphrase.read())
+			return passphrase["encrypt"]["passphrase"]
 encyptFile()
-'''
-for path in home_fs.walk.files(filter=['*.gpg']):
-	print(home_fs)
-	print(keyDir + path[:-4])
-'''
+
