@@ -18,7 +18,8 @@ def setPassphrase(passphrase):
         data["encrypt"]["passphrase"]=passphrase
         with home_fs.open('envConfig.json','w') as envConfig:
             json.dump(data, envConfig)
-        envConfig.close()    
+        envConfig.close()
+setEnv()            
 
 
 
