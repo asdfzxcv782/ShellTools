@@ -1,4 +1,8 @@
 import sys
+import os
+import fs
+from fs import open_fs
+import json
 import slackNotification as slack
 
 Memory={
@@ -7,7 +11,16 @@ Memory={
 	"MemoryFree":sys.argv[3]
 }
 
-MemoryFreeAlarm=20
+home=os.environ['HOME']
+keyDir=home+"/ShellTools/keys"
+
+with open_fs(keyDir) as home_fs:
+	with home_fs.open('envConfig.json','r') as envConfig:
+		data=json.load(envConfig)
+		MemoryFreeAlarm=data["Alarm"]["MemoryFreeAlarm"]
+	envConfig.close()
+home_fs.close()		
+
 
 def Caculate(**info):
 	#MemoryFreeAlarm=90
