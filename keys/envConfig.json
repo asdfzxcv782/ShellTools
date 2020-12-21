@@ -3,7 +3,7 @@
         "passphrase":""
     },
     "Alarm":{
-        "Status":false,
+        "Status": false,
         "MemoryFreeAlarm":""
     }
 }

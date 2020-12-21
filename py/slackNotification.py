@@ -18,7 +18,7 @@ def getWebHook():
 	home_fs.close()	
 
 def setMessage(status):
-	with open_fs(home + '/ShellTools/py') as home_fs:
+	with open_fs(home + '/ShellTools/keys') as home_fs:
 		with home_fs.open('sampleNotification.json') as Message:
 			print(status)
 			slackMessage=json.loads(Message.read())

@@ -2,6 +2,7 @@ import os
 import fs
 from fs import open_fs
 import json
+import tools.EditFile as file
 
 home=os.environ['HOME']
 
@@ -13,7 +14,12 @@ def setEnv():
     Alarm=input("MemoryFreeAlarm:")
     setMemoryFreeAlarm(int(Alarm))
 
-def setPassphrase(passphrase): 
+def setPassphrase(passphrase):
+    FIleHandle=file.File(keyDir,"envConfig.json")
+    data = FIleHandle.Readjson()
+    data["encrypt"]["passphrase"]=passphrase
+    FIleHandle.Updatejson(data)
+    """ 
     with open_fs(keyDir) as home_fs:
         with home_fs.open('envConfig.json','r') as envConfig:
             data=json.load(envConfig)
@@ -21,8 +27,14 @@ def setPassphrase(passphrase):
         with home_fs.open('envConfig.json','w') as envConfig:
             json.dump(data, envConfig)
         envConfig.close()
-    home_fs.close()    
+    home_fs.close()
+    """    
 def setMemoryFreeAlarm(Alarm) :
+    FIleHandle=file.File(keyDir,"envConfig.json")
+    data = FIleHandle.Readjson()
+    data["Alarm"]["MemoryFreeAlarm"]=Alarm
+    FIleHandle.Updatejson(data)
+    '''
     with open_fs(keyDir) as home_fs:
         with home_fs.open('envConfig.json','r') as envConfig:
             data=json.load(envConfig)
@@ -31,6 +43,7 @@ def setMemoryFreeAlarm(Alarm) :
             json.dump(data, envConfig)
         envConfig.close()
     home_fs.close()    
+    '''
 setEnv()            
 
 
