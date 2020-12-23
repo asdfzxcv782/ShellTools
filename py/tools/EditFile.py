@@ -5,22 +5,39 @@ class File():
     def __init__(self,FilePath,FileName):
         self.FilePath = FilePath
         self.FileName = FileName
+
+    def ReadFile(self):
+        with open_fs(self.FilePath) as home_fs:
+            with home_fs.open(self.FileName,'r') as envConfig:
+                if ".json" in self.FileName:
+                    return json.load(envConfig)
+                else:
+                    return envConfig.read()    
+            envConfig.close()
+        home_fs.close()    
         
     def Readjson(self):
         with open_fs(self.FilePath) as home_fs:
             with home_fs.open(self.FileName,'r') as envConfig:
-                print("test")
                 return json.load(envConfig)    
             envConfig.close()
         home_fs.close()
 
-    def Updatejson(self,data):
+    def UpdateFile(self,data):
         with open_fs(self.FilePath) as home_fs:
             with home_fs.open(self.FileName,'w') as envConfig:
-                json.dump(data, envConfig)   
+                if ".json" in self.FileName:
+                    json.dump(data, envConfig)
+                else:
+                    envConfig.write(data)   
             envConfig.close()
         home_fs.close()
-        
+
+#test case              
+if __name__ == '__main__':
+    test=File('./Keys','testjson.txt')
+    print(test.ReadFile())
+    test.UpdateFile("456")        
         
         
 

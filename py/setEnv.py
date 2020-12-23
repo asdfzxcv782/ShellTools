@@ -16,36 +16,18 @@ def setEnv():
 
 def setPassphrase(passphrase):
     FIleHandle=file.File(keyDir,"envConfig.json")
-    data = FIleHandle.Readjson()
+    data = FIleHandle.ReadFile()
     data["encrypt"]["passphrase"]=passphrase
-    FIleHandle.Updatejson(data)
-    """ 
-    with open_fs(keyDir) as home_fs:
-        with home_fs.open('envConfig.json','r') as envConfig:
-            data=json.load(envConfig)
-        data["encrypt"]["passphrase"]=passphrase
-        with home_fs.open('envConfig.json','w') as envConfig:
-            json.dump(data, envConfig)
-        envConfig.close()
-    home_fs.close()
-    """    
+    FIleHandle.UpdateFile(data)
+    
 def setMemoryFreeAlarm(Alarm) :
     FIleHandle=file.File(keyDir,"envConfig.json")
-    data = FIleHandle.Readjson()
+    data = FIleHandle.ReadFile()
     data["Alarm"]["MemoryFreeAlarm"]=Alarm
-    FIleHandle.Updatejson(data)
-    '''
-    with open_fs(keyDir) as home_fs:
-        with home_fs.open('envConfig.json','r') as envConfig:
-            data=json.load(envConfig)
-        data["Alarm"]["MemoryFreeAlarm"]=Alarm
-        with home_fs.open('envConfig.json','w') as envConfig:
-            json.dump(data, envConfig)
-        envConfig.close()
-    home_fs.close()    
-    '''
-setEnv()            
+    FIleHandle.UpdateFile(data)
+            
 
-
+if __name__ == '__main__':
+    setEnv()
 
 

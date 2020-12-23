@@ -49,5 +49,6 @@ Thumbs.db
 *.wmv
 
 #Secret Key
-*.txt
+keys/*.txt
 
+keys/envConfig.json

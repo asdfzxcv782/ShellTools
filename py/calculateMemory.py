@@ -4,6 +4,7 @@ import fs
 from fs import open_fs
 import json
 import slackNotification as slack
+import tools.EditFile as file
 
 Memory={
 	"MemoryTotal":sys.argv[1],
@@ -13,7 +14,11 @@ Memory={
 
 home=os.environ['HOME']
 keyDir=home+"/ShellTools/keys"
-
+FileHandle=file.File(keyDir,"envConfig.json")
+data = FileHandle.ReadFile()
+MemoryFreeAlarm=data["Alarm"]["MemoryFreeAlarm"]
+MemoryAlarmStatus=data["Alarm"]["Status"]
+'''
 with open_fs(keyDir) as home_fs:
 	with home_fs.open('envConfig.json','r') as envConfig:
 		data=json.load(envConfig)
@@ -21,7 +26,7 @@ with open_fs(keyDir) as home_fs:
 		MemoryAlarmStatus=data["Alarm"]["Status"]
 	envConfig.close()
 home_fs.close()		
-
+'''
 
 def Caculate(**info):
 	#MemoryFreeAlarm=90
@@ -39,6 +44,11 @@ def Caculate(**info):
 		Status["Alarm"]=True
 	print(MemoryAlarmStatus)	
 	if Status["Alarm"] != MemoryAlarmStatus:
+		FileHandle=file.File(keyDir,"envConfig.json")
+		Slackdata = FileHandle.ReadFile()
+		Slackdata["Alarm"]["Status"] = Status["Alarm"]
+		FileHandle.UpdateFile(Slackdata)
+		'''
 		with open_fs(keyDir) as home_fs:
 			with home_fs.open('envConfig.json','r') as envConfig:
 				data=json.load(envConfig)
@@ -46,11 +56,11 @@ def Caculate(**info):
 			with home_fs.open('envConfig.json','w') as envConfig:
 				json.dump(data, envConfig)	
 			envConfig.close()
-		home_fs.close()	
+		home_fs.close()
+		'''	
 		slack.sendMessage(Status)	
 	return Status
 	
-
-Result=Caculate(**Memory)
-
-print(Result)
+if __name__ == '__main__':
+	Result=Caculate(**Memory)
+	print(Result)
