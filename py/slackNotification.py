@@ -39,7 +39,7 @@ def setMessage(status):
 	slackMessage["attachments"][0]["fields"][1]["title"]="MemoryUsed"
 	slackMessage["attachments"][0]["fields"][1]["value"]=str(status["MemoryUsed"]) + "%"	
 	print(slackMessage)
-	FileHandle.UpdateFile(slackMessage)
+	return json.dumps(slackMessage,  indent=4) 
 	'''
 	with open_fs(home + '/ShellTools/keys') as home_fs:
 		with home_fs.open('sampleNotification.json') as Message:
