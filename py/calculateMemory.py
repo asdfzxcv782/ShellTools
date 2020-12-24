@@ -18,15 +18,6 @@ FileHandle=file.File(keyDir,"envConfig.json")
 data = FileHandle.ReadFile()
 MemoryFreeAlarm=data["Alarm"]["MemoryFreeAlarm"]
 MemoryAlarmStatus=data["Alarm"]["Status"]
-'''
-with open_fs(keyDir) as home_fs:
-	with home_fs.open('envConfig.json','r') as envConfig:
-		data=json.load(envConfig)
-		MemoryFreeAlarm=data["Alarm"]["MemoryFreeAlarm"]
-		MemoryAlarmStatus=data["Alarm"]["Status"]
-	envConfig.close()
-home_fs.close()		
-'''
 
 def Caculate(**info):
 	#MemoryFreeAlarm=90
@@ -48,16 +39,6 @@ def Caculate(**info):
 		Slackdata = FileHandle.ReadFile()
 		Slackdata["Alarm"]["Status"] = Status["Alarm"]
 		FileHandle.UpdateFile(Slackdata)
-		'''
-		with open_fs(keyDir) as home_fs:
-			with home_fs.open('envConfig.json','r') as envConfig:
-				data=json.load(envConfig)
-				data["Alarm"]["Status"] = Status["Alarm"]
-			with home_fs.open('envConfig.json','w') as envConfig:
-				json.dump(data, envConfig)	
-			envConfig.close()
-		home_fs.close()
-		'''	
 		slack.sendMessage(Status)	
 	return Status
 	

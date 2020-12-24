@@ -6,7 +6,8 @@ class ServerStatus():
         pass
 
     def getMemoryFree(self):
-        return psutil.virtual_memory().percent
+        Result=round((psutil.virtual_memory().free/psutil.virtual_memory().total*100),2)
+        return Result
 	
 if __name__ == '__main__':
     Status=ServerStatus()
