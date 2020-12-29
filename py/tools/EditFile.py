@@ -1,7 +1,9 @@
 import os
 import fs
 from fs import open_fs
+import gnupg
 import json
+
 class File():
     def __init__(self,FilePath,FileName):
         ProjectPath = os.path.dirname(os.path.realpath(__file__)).rsplit(os.sep, 2)[0]
@@ -27,6 +29,23 @@ class File():
                     envConfig.write(data)   
             envConfig.close()
         home_fs.close()
+
+    def EncyptFile(self,passphrase):
+        home=os.environ['HOME']
+        gpg = gnupg.GPG(gnupghome=home + '/.gnupg')
+        home_fs = open_fs(self.FilePath)
+        for path in home_fs.walk.files(filter=['*.gpg']):
+		with home_fs.open(path[1:], 'rb') as f:
+    			status = gpg.decrypt_file(
+				file=f,
+				passphrase=passphrase,
+				output=self.FilePath + path[:-4]
+			)
+		print("ok: ", status.ok)
+		print("status: ", status.status)
+		print("stderr: ", status.stderr)
+		f.close()
+
 
 #test case              
 if __name__ == '__main__':

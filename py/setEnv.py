@@ -11,6 +11,7 @@ def setEnv():
     setPassphrase(passphrase)
     Alarm=input("MemoryFreeAlarm:")
     setMemoryFreeAlarm(int(Alarm))
+    EncryptKey(passphrase)
 
 def setPassphrase(passphrase):
     FIleHandle=file.File(keyDir,"envConfig.json")
@@ -23,6 +24,10 @@ def setMemoryFreeAlarm(Alarm) :
     data = FIleHandle.ReadFile()
     data["Alarm"]["MemoryFreeAlarm"]=Alarm
     FIleHandle.UpdateFile(data)
+
+def EncryptKey(passphrase):
+    FIleHandle=file.File(keyDir)
+    FIleHandle.EncyptFile(passphrase)
             
 
 if __name__ == '__main__':
