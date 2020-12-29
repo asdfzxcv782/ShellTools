@@ -1,9 +1,11 @@
+import os
 import fs
 from fs import open_fs
 import json
 class File():
     def __init__(self,FilePath,FileName):
-        self.FilePath = FilePath
+        ProjectPath = os.path.dirname(os.path.realpath(__file__)).rsplit(os.sep, 2)[0]
+        self.FilePath = ProjectPath + FilePath
         self.FileName = FileName
 
     def ReadFile(self):
@@ -15,13 +17,6 @@ class File():
                     return envConfig.read()    
             envConfig.close()
         home_fs.close()    
-        
-    def Readjson(self):
-        with open_fs(self.FilePath) as home_fs:
-            with home_fs.open(self.FileName,'r') as envConfig:
-                return json.load(envConfig)    
-            envConfig.close()
-        home_fs.close()
 
     def UpdateFile(self,data):
         with open_fs(self.FilePath) as home_fs:
@@ -35,7 +30,7 @@ class File():
 
 #test case              
 if __name__ == '__main__':
-    test=File('./Keys','testjson.txt')
+    test=File('/Keys','testjson.txt')
     print(test.ReadFile())
     test.UpdateFile("456")        
         

@@ -6,7 +6,7 @@ import json
 
 home=os.environ['HOME']
 
-keyDir=home+"/ShellTools/keys"
+keyDir="/keys"
 
 gpg = gnupg.GPG(gnupghome=home + '/.gnupg')
 

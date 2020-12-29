@@ -5,22 +5,18 @@ from fs import open_fs
 import json
 import slackNotification as slack
 import tools.EditFile as file
+import tools.GetServerStatus as status
 
-Memory={
-	"MemoryTotal":sys.argv[1],
-	"MemoryUsed":sys.argv[2],
-	"MemoryFree":sys.argv[3]
-}
 
 home=os.environ['HOME']
-keyDir="/keys"
+keyDir=home+"/ShellTools/keys"
 FileHandle=file.File(keyDir,"envConfig.json")
 data = FileHandle.ReadFile()
 MemoryFreeAlarm=data["Alarm"]["MemoryFreeAlarm"]
 MemoryAlarmStatus=data["Alarm"]["Status"]
 
+'''
 def Caculate(**info):
-	#MemoryFreeAlarm=90
 	for index,x in enumerate(info,start=1):
 		info[x]=int(sys.argv[index])
 	Status={
@@ -30,7 +26,6 @@ def Caculate(**info):
 	}
 	print(Status)
 	Status["MemoryFree"]=round((info["MemoryFree"]/info["MemoryTotal"]*100),2)
-	Status["MemoryUsed"]=round((info["MemoryUsed"]/info["MemoryTotal"]*100),2)
 	if Status["MemoryFree"] < MemoryFreeAlarm :
 		Status["Alarm"]=True
 	print(MemoryAlarmStatus)	
@@ -41,7 +36,7 @@ def Caculate(**info):
 		FileHandle.UpdateFile(Slackdata)
 		slack.sendMessage(Status)	
 	return Status
-	
+'''
 if __name__ == '__main__':
-	Result=Caculate(**Memory)
+	#Result=Caculate(**Memory)
 	print(Result)

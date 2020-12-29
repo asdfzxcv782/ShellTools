@@ -4,9 +4,7 @@ from fs import open_fs
 import json
 import tools.EditFile as file
 
-home=os.environ['HOME']
-
-keyDir=home+"/ShellTools/keys"
+keyDir= "/keys"
 
 def setEnv():
     passphrase=input("Passphrase: ")

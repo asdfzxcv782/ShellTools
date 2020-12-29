@@ -1,9 +1,1 @@
-{
-    "encrypt":{
-        "passphrase":""
-    },
-    "Alarm":{
-        "Status": false,
-        "MemoryFreeAlarm":""
-    }
-}
+{"encrypt": {"passphrase": "vshow2351700"}, "Alarm": {"Status": false, "MemoryFreeAlarm": 10}}

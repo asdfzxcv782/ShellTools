@@ -7,8 +7,8 @@ import socket
 import os
 import tools.EditFile as file
 
-home=os.environ['HOME']
-keyDir=home+"/ShellTools/keys"
+#home=os.environ['HOME']
+keyDir="/keys"
 
 def getWebHook():
 	FileHandle=file.File(keyDir,"slackWebhook.txt")
