@@ -8,9 +8,8 @@ class File():
     def __init__(self,FilePath,FileName=None):
         if FileName is None:
             FileName = ""
-        else:
-            ProjectPath = os.path.dirname(os.path.realpath(__file__)).rsplit(os.sep, 2)[0]
-            self.FilePath = ProjectPath + FilePath
+        ProjectPath = os.path.dirname(os.path.realpath(__file__)).rsplit(os.sep, 2)[0]
+        self.FilePath = ProjectPath + FilePath
         self.FileName = FileName
 
     def ReadFile(self):

@@ -28,9 +28,8 @@ def setMessage(status):
 	slackMessage["username"] = socket.gethostname()	
 	slackMessage["attachments"][0]["fields"][0]["title"]="MemoryFree"
 	slackMessage["attachments"][0]["fields"][0]["value"]=str(status["MemoryFree"]) + "%"
-	slackMessage["attachments"][0]["fields"][1]["title"]="MemoryUsed"
-	slackMessage["attachments"][0]["fields"][1]["value"]=str(status["MemoryUsed"]) + "%"	
-	print(slackMessage)
+	slackMessage["attachments"][0]["fields"][1]["title"]="CpuUsed"
+	slackMessage["attachments"][0]["fields"][1]["value"]=str(status["CpuUsage"]) + "%"	
 	return json.dumps(slackMessage,  indent=4) 
 
 def sendMessage(status):

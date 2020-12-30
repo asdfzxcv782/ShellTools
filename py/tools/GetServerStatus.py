@@ -12,6 +12,9 @@ class ServerStatus():
     def getDiskPartitions(self):
         return psutil.disk_partitions()
 
+    def getCpuPercent(self):
+        return psutil.cpu_percent(interval=1)
+
     def getPids(self):
         for proc in psutil.process_iter(['pid', 'name', 'username']):
             print(proc.info)        
@@ -20,4 +23,4 @@ if __name__ == '__main__':
     Status=ServerStatus()
     print(Status.getMemoryFree())
     print(Status.getDiskPartitions())
-    Status.getPids()    
+    print(Status.getCpuPercent())  
