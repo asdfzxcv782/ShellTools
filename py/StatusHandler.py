@@ -26,7 +26,6 @@ def checkServerStatus():
 		Status["Alarm"] = True
 	else:
 		Status["Alarm"] = False
-	print(type(datetime.datetime.now()))
 	print(str(datetime.datetime.now()) + " "  + str(Status))
 	if Status["Alarm"] != MemoryAlarmStatus:
 		FileHandle=file.File(keyDir,"envConfig.json")
