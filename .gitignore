@@ -51,4 +51,4 @@ Thumbs.db
 #Secret Key
 keys/*.txt
 
-keys/envConfig.json
+#keys/envConfig.json
