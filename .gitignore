@@ -50,5 +50,6 @@ Thumbs.db
 
 #Secret Key
 keys/*.txt
+keys/ServerRequestConfig.json
 
 #keys/envConfig.json

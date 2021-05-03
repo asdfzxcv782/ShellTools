@@ -1,6 +1,7 @@
 import slackNotification as slack
 import tools.EditFile as file
 import tools.GetServerStatus as status
+import serverNotification as server
 import datetime
 
 keyDir= "/keys"
@@ -18,10 +19,15 @@ def checkServerStatus():
 	MemoryFreeAlarm=data["Alarm"]["MemoryFreeAlarm"]
 	MemoryAlarmStatus=data["Alarm"]["Status"]
 
-	#create Status for slack
+	
 	Status = {}
 	Status["MemoryFree"] = MemoryFree
 	Status["CpuUsage"] = CpuUsage
+
+	#send message to server
+	server.sendToServer(Status)
+
+	#create Status for slack
 	if MemoryFree < MemoryFreeAlarm:
 		Status["Alarm"] = True
 	else:
